@@ -16,11 +16,15 @@ class MoviesController extends Controller
     public function index(Request $request)
     {
         $search = $request->query('title');
+        $take = $request->query('take');
+        $skip = $request->query('skip');
+        
         if ($search){
-            return Movie::search($search);
+            return Movie::search($search)->where('id','>',$skip)->take($take);
 
         }
-        return Movie::all();
+
+        return Movie::all()->where('id','>',$skip)->take($take);
     }
 
     /**
