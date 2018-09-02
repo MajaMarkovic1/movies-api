@@ -23,7 +23,6 @@ class MoviesController extends Controller
             return Movie::search($search)->where('id','>',$skip)->take($take);
 
         }
-
         return Movie::all()->where('id','>',$skip)->take($take);
     }
 
