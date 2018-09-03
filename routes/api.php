@@ -34,4 +34,6 @@ Route::group([
 });
 
 Route::resource('movies', 'MoviesController')->middleware('auth:api');
+Route::resource('users', 'UsersController')->middleware('auth:api');
+
 
