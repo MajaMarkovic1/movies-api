@@ -2,28 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Movie;
+use App\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreMoviesRequest;
+use App\Http\Requests\StoreUsersRequest;
 
-class MoviesController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $search = $request->query('title');
-        $take = $request->query('take', 5);
-        $skip = $request->query('skip', 0);
+        //
+    }
 
-        if ($search){
-            return Movie::search($search)->where('id','>',$skip)->take($take);
-
-        }
-        return Movie::all()->where('id','>',$skip)->take($take);
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -32,12 +34,11 @@ class MoviesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMoviesRequest $request)
+    public function store(StoreUsersRequest $request)
     {
         $validated = $request->validated();
-
-        $movie = Movie::create($request->all());
-        return $movie;
+        
+        return User::create($request->all());
     }
 
     /**
@@ -48,7 +49,18 @@ class MoviesController extends Controller
      */
     public function show($id)
     {
-        return Movie::findOrFail($id);
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
     }
 
     /**
@@ -60,10 +72,7 @@ class MoviesController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $movie = Movie::findOrFail($id);
-        $movie->update($request->all());
-        return $movie;
+        //
     }
 
     /**
@@ -74,6 +83,6 @@ class MoviesController extends Controller
      */
     public function destroy($id)
     {
-        return Movie::destroy($id);
+        //
     }
 }
