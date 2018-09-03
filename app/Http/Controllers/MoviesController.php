@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Movie;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreMovies;
+use App\Http\Requests\StoreMoviesRequest;
 
 class MoviesController extends Controller
 {
@@ -16,8 +16,8 @@ class MoviesController extends Controller
     public function index(Request $request)
     {
         $search = $request->query('title');
-        $take = $request->query('take');
-        $skip = $request->query('skip');
+        $take = $request->query('take', 5);
+        $skip = $request->query('skip', 0);
         
         if ($search){
             return Movie::search($search)->where('id','>',$skip)->take($take);
@@ -32,7 +32,7 @@ class MoviesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMovies $request)
+    public function store(StoreMoviesRequest $request)
     {
         $validated = $request->validated();
 
@@ -58,9 +58,8 @@ class MoviesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreMovies $request, $id)
+    public function update(Request $request, $id)
     {
-        $validated = $request->validated();
 
         $movie = Movie::findOrFail($id);
         $movie->update($request->all());
