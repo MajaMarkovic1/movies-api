@@ -30,10 +30,10 @@ Route::group([
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
+    Route::post('register', 'AuthController@register');
 
 });
 
 Route::resource('movies', 'MoviesController')->middleware('auth:api');
-Route::resource('users', 'UsersController')->middleware('auth:api');
 
 
